@@ -240,6 +240,96 @@ vim.opt.rtp:prepend(lazypath)
 -- NOTE: Here is where you install your plugins.
 require('lazy').setup({
   -- plugnis added by me
+  { 'folke/neodev.nvim', opts = {} }, -- library = { plugins = { "nvim-dap-ui" }, types = true },
+  { 'nvim-neotest/nvim-nio' },
+  { 'rcarriga/nvim-dap-ui', dependencies = { 'mfussenegger/nvim-dap', 'nvim-neotest/nvim-nio' } },
+  {
+    'mfussenegger/nvim-dap',
+    dependencies = 'rcarriga/nvim-dap-ui',
+    config = function()
+      local dapui = require 'dapui'
+      dapui.setup {
+        icons = {
+          expanded = '▾',
+          collapsed = '▸',
+        },
+        mappings = {
+          -- Use a table to apply multiple mappings
+          expand = { '<CR>', '<2-LeftMouse>' },
+          open = 'o',
+          remove = 'd',
+          edit = 'e',
+          repl = 'r',
+        },
+        layouts = {
+          {
+            elements = { -- Elements can be strings or table with id and size keys.
+              {
+                id = 'scopes',
+                size = 0.25,
+              },
+              'breakpoints',
+              'stacks',
+              'watches',
+            },
+            size = 40,
+            position = 'left',
+          },
+          {
+            elements = { 'repl', 'console' },
+            size = 10,
+            position = 'bottom',
+          },
+        },
+        floating = {
+          max_height = nil, -- These can be integers or a float between 0 and 1.
+          max_width = nil, -- Floats will be treated as percentage of your screen.
+          border = 'single', -- Border style. Can be "single", "double" or "rounded"
+          mappings = {
+            close = { 'q', '<Esc>' },
+          },
+        },
+        windows = {
+          indent = 1,
+        },
+        controls = {
+          enabled = true,
+          -- Display controls in this element
+          element = 'repl',
+          icons = {
+            pause = '⏸︎',
+            play = '⏵︎',
+            step_into = '↓',
+            step_over = '⤼',
+            step_out = '↑',
+            step_back = '←',
+            run_last = '↻',
+            terminate = '⏹︎',
+          },
+        },
+      }
+      local dap = require 'dap'
+
+      dap.listeners.after.event_initialized['dapui_config'] = function()
+        dapui.open()
+      end
+      dap.listeners.before.event_exited['dapui_config'] = function()
+        dapui.close()
+      end
+      dap.listeners.before.event_terminated['dapui_config'] = function()
+        dapui.close()
+      end
+    end,
+  },
+  {
+    -- Show function signature when you type
+    'ray-x/lsp_signature.nvim',
+    opts = {},
+  },
+  {
+    'mfussenegger/nvim-jdtls',
+  },
+  { 'akinsho/bufferline.nvim', version = '*', dependencies = 'nvim-tree/nvim-web-devicons', opts = {} },
   'mbbill/undotree',
   'nvim-lua/plenary.nvim',
   'nvim-tree/nvim-web-devicons',
@@ -903,7 +993,7 @@ require('lazy').setup({
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
     opts = {
-      ensure_installed = { 'bash', 'c', 'html', 'lua', 'markdown', 'vim', 'vimdoc' },
+      ensure_installed = { 'bash', 'c', 'html', 'lua', 'markdown', 'vim', 'vimdoc', 'java' },
       -- Autoinstall languages that are not installed
       auto_install = true,
       highlight = {
@@ -948,7 +1038,7 @@ require('lazy').setup({
   --
   --  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
   --    For additional information, see `:help lazy.nvim-lazy.nvim-structuring-your-plugins`
-  -- { import = 'custom.plugins' },
+  --  { import = 'custom.plugins' },
 }, {
   ui = {
     -- If you are using a Nerd Font: set icons to an empty table which will use the
