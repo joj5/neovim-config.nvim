@@ -1,0 +1,1 @@
+return { 'dbinagi/nomodoro', opts = {} }
