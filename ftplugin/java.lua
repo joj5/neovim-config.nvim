@@ -132,7 +132,7 @@ local config = {
         },
       }
       jdtls.setup_dap { hotcodereplace = 'auto' }
-      jdtls.setup.add_commands()
+      -- jdtls.setup.add_commands() -- this line is deprecated
       -- Auto-detect main and setup dap config
       require('jdtls.dap').setup_dap_main_class_configs {
         config_overrides = {
