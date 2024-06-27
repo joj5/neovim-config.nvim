@@ -31,3 +31,6 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 
 -- Switch to normal mode quickly from insert
 vim.keymap.set('i', 'jk', '<ESC>', { desc = 'Normal mode switch' })
+
+-- Toggle Zen mode
+vim.keymap.set('n', '<leader>vz', '<cmd>ZenMode<cr>', { desc = '[V]iew [Z]en Mode' })

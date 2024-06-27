@@ -11,7 +11,7 @@ vim.opt.colorcolumn = '80'
 vim.opt.guicursor = ''
 
 -- Set to true if you have a Nerd Font installed
-vim.g.have_nerd_font = false
+vim.g.have_nerd_font = true
 
 -- [[ Setting options ]]
 -- See `:help vim.opt`
@@ -79,3 +79,6 @@ vim.opt.scrolloff = 10
 
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
 vim.opt.hlsearch = true
+
+-- Set Term gui colors
+vim.opt.termguicolors = true

@@ -176,6 +176,12 @@ local config = {
           template = '${object.className}{${member.name()}=${member.value}, ${otherMembers}}',
         },
       },
+      format = {
+        settings = {
+          url = '~/Templates/java-styles/java-google-formatter.xml',
+          profile = 'GoogleStyle',
+        },
+      },
     },
   },
 }
