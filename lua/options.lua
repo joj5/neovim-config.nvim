@@ -82,3 +82,7 @@ vim.opt.hlsearch = true
 
 -- Set Term gui colors
 vim.opt.termguicolors = true
+
+-- Set the tab space size
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4

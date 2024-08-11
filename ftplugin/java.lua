@@ -136,7 +136,7 @@ local config = {
       -- Auto-detect main and setup dap config
       require('jdtls.dap').setup_dap_main_class_configs {
         config_overrides = {
-          vmArgs = '-Dspring.profiles.active=local',
+          vmArgs = '-Dspring.profiles.active=dev', -- local
         },
       }
     end
@@ -178,7 +178,7 @@ local config = {
       },
       format = {
         settings = {
-          url = '~/Templates/java-styles/java-google-formatter.xml',
+          url = os.getenv 'HOME' .. '/Templates/java-styles/java-google-formatter.xml',
           profile = 'GoogleStyle',
         },
       },
@@ -186,11 +186,3 @@ local config = {
   },
 }
 jdtls.start_or_attach(config)
-
---[[
-local config = {
-  cmd = { '~/.local/share/nvim/mason/bin/jdtls' },
-  root_dir = vim.fs.dirname(vim.fs.find({ 'gradlew', '.git', 'mvnw' }, { upward = true })[1]),
-}
-require('jdtls').start_or_attach(config)
---]]
